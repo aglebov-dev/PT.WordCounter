@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PT.WordCounter", "PT.WordCounter\PT.WordCounter.csproj", "{ABE7F847-7060-4D4A-82E4-1FE17C3BFD40}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Provider", "Provider", "{72C6B828-6CCA-4AE9-8C92-FEB119D523E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PT.WordCounter.FileProvider", "PT.WordCounter.FileProvider\PT.WordCounter.FileProvider.csproj", "{76F1D1F4-7F6F-4A82-8801-0D94CAE58CF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PT.WordCounter.DatabaseProvider", "PT.WordCounter.DatabaseProvider\PT.WordCounter.DatabaseProvider.csproj", "{A2ED80C9-644F-4243-B731-5336309B6DBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PT.WordCounter.ConsoleProvider", "PT.WordCounter.ConsoleProvider\PT.WordCounter.ConsoleProvider.csproj", "{40DDB7E2-B7A1-4816-B927-26AD7F3E1AE5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{50A4EA1A-E082-4FA6-8C17-4BAFC663035A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PT.WordCounter.Contracts", "PT.WordCounter.Contracts\PT.WordCounter.Contracts.csproj", "{336D128E-F5D1-48CF-A396-53DAD8D1D681}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABE7F847-7060-4D4A-82E4-1FE17C3BFD40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABE7F847-7060-4D4A-82E4-1FE17C3BFD40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABE7F847-7060-4D4A-82E4-1FE17C3BFD40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABE7F847-7060-4D4A-82E4-1FE17C3BFD40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76F1D1F4-7F6F-4A82-8801-0D94CAE58CF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76F1D1F4-7F6F-4A82-8801-0D94CAE58CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76F1D1F4-7F6F-4A82-8801-0D94CAE58CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76F1D1F4-7F6F-4A82-8801-0D94CAE58CF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2ED80C9-644F-4243-B731-5336309B6DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2ED80C9-644F-4243-B731-5336309B6DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2ED80C9-644F-4243-B731-5336309B6DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2ED80C9-644F-4243-B731-5336309B6DBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40DDB7E2-B7A1-4816-B927-26AD7F3E1AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40DDB7E2-B7A1-4816-B927-26AD7F3E1AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40DDB7E2-B7A1-4816-B927-26AD7F3E1AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40DDB7E2-B7A1-4816-B927-26AD7F3E1AE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{336D128E-F5D1-48CF-A396-53DAD8D1D681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{336D128E-F5D1-48CF-A396-53DAD8D1D681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{336D128E-F5D1-48CF-A396-53DAD8D1D681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{336D128E-F5D1-48CF-A396-53DAD8D1D681}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{72C6B828-6CCA-4AE9-8C92-FEB119D523E2} = {50A4EA1A-E082-4FA6-8C17-4BAFC663035A}
+		{76F1D1F4-7F6F-4A82-8801-0D94CAE58CF4} = {72C6B828-6CCA-4AE9-8C92-FEB119D523E2}
+		{A2ED80C9-644F-4243-B731-5336309B6DBA} = {72C6B828-6CCA-4AE9-8C92-FEB119D523E2}
+		{40DDB7E2-B7A1-4816-B927-26AD7F3E1AE5} = {72C6B828-6CCA-4AE9-8C92-FEB119D523E2}
+		{336D128E-F5D1-48CF-A396-53DAD8D1D681} = {72C6B828-6CCA-4AE9-8C92-FEB119D523E2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E910434E-97AC-4D40-82A6-C2CC6E2596CC}
+	EndGlobalSection
+EndGlobal
