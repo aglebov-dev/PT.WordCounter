@@ -5,12 +5,19 @@ The application supports 3 main data providers:
 - provider for console input
 - provider to read data from the database
 
+## Build
+
+```console
+dotnet build ./src -c Release
+```
+
 ## Read from file
 
 To process the file and write the report to the file, use the following command:
 
-```shell
-PT.WordCounter.exe file --source C:\\file.txt --target C:\\report.txt --utf8
+```console
+cd ./src/PT.WordCounter/bin/Release/netcoreapp3.1
+dotnet PT.WordCounter.dll file --source C:\\file.txt --target C:\\report.txt --utf8
 ```
 
 > **source** - The file to be used for reading
@@ -25,8 +32,9 @@ PT.WordCounter.exe file --source C:\\file.txt --target C:\\report.txt --utf8
 
 To read data from the console, use the command:
 
-```shell
-PT.WordCounter.exe console --text "A, B and C were sitting on the pipe B fell A tried, who remained on the pipe"
+```console
+cd ./src/PT.WordCounter/bin/Release/netcoreapp3.1
+dotnet PT.WordCounter.dll console --text "A, B and C were sitting on the pipe B fell A tried, who remained on the pipe"
 ```
 
 > **text** - Text to be used for analysis
@@ -37,8 +45,9 @@ PT.WordCounter.exe console --text "A, B and C were sitting on the pipe B fell A 
 
 To read data from the database, use the command:
 
-```shell
-PT.WordCounter.exe db --connection-string "User ID=developer;Password=empty;Host=localhost;Port=5432;Database=postgres;" --table "private.data-table" --column "description"
+```console
+cd ./src/PT.WordCounter/bin/Release/netcoreapp3.1
+dotnet PT.WordCounter.dll db --connection-string "User ID=developer;Password=empty;Host=localhost;Port=5432;Database=postgres;" --table "private.data-table" --column "description"
 ```
 
 > **connection-string** - string for connecting to the database (only postgres database is supported)
