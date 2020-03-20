@@ -6,7 +6,7 @@ using PT.WordCounter.Contracts;
 
 namespace PT.WordCounter.ConsoleProvider
 {
-    internal class ConsoleReader: IReader
+    public class ConsoleReader: IReader
     {
         private readonly string _text;
         private readonly CancellationToken _token;

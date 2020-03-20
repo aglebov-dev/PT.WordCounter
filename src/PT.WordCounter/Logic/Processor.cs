@@ -9,12 +9,14 @@ namespace PT.WordCounter.Logic
 {
     internal class Processor
     {
-        private readonly IEnumerable<IDataProvider> _textProviders;
+        private readonly IReader _reader;
+        private readonly IWriter _writer;
         private readonly SemaphoreSlim _semaphore;
 
-        public Processor(IEnumerable<IDataProvider> textProviders)
+        public Processor(IReader reader, IWriter writer)
         {
-            _textProviders = textProviders;
+            _reader = reader;
+            _writer = writer;
             _semaphore = new SemaphoreSlim(Constants.THREADS_COUNT);
         }
 
@@ -27,12 +29,7 @@ namespace PT.WordCounter.Logic
         private async Task<Report> Read(CancellationToken token)
         {
             var report = new Report();
-            var query =
-                from provider in _textProviders
-                let reader = provider.CreateReader(token)
-                select CreateTask(reader, report, token);
-
-            await Task.WhenAll(query);
+            await CreateTask(_reader, report, token);
 
             return report;
         }
@@ -53,10 +50,7 @@ namespace PT.WordCounter.Logic
             if (!token.IsCancellationRequested)
             {
                 var tree = report.GetTree();
-                foreach (var writer in _textProviders.Select(x => x.CreateWriter(token)))
-                {
-                    writer.Write(tree);
-                }
+                _writer.Write(tree);
             }
         }
 

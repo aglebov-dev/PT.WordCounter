@@ -8,7 +8,7 @@ using PT.WordCounter.DatabaseProvider.DataAccess;
 
 namespace PT.WordCounter.DatabaseProvider
 {
-    internal class DatabaseReader : IReader
+    public class DatabaseReader : IReader
     {
         private readonly DatabaseContext _context;
         private readonly DatabaseProviderOptions _options;

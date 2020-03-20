@@ -5,7 +5,7 @@ using PT.WordCounter.Contracts;
 
 namespace PT.WordCounter.FileProvider
 {
-    internal class TextFileReader : IReader
+    public class TextFileReader : IReader
     {
         private readonly TextFileProviderOptions _options;
         private readonly CancellationToken _token;

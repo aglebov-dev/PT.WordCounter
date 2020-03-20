@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Threading;
 using Autofac;
 using PT.WordCounter.Logic;
 using PT.WordCounter.Support;
@@ -7,22 +8,25 @@ using PT.WordCounter.Contracts;
 using PT.WordCounter.FileProvider;
 using PT.WordCounter.ConsoleProvider;
 using PT.WordCounter.DatabaseProvider;
+using Microsoft.EntityFrameworkCore;
+using PT.WordCounter.DatabaseProvider.DataAccess;
 
 namespace PT.WordCounter
 {
     internal static class CompositionRoot
     {
-        private static ContainerBuilder Default()
+        private static ContainerBuilder Default(CancellationToken token)
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<Processor>();
+            builder.Register(x => token);
 
             return builder;
         }
 
-        public static IContainer CreateContainer(ICommand command)
+        public static IContainer CreateContainer(ICommand command, CancellationToken token)
         {
-            var builder = Default();
+            var builder = Default(token);
             if (command is FileCommand fileCommand)
             {
                 return CreateContainerInternal(fileCommand, builder);
@@ -51,23 +55,63 @@ namespace PT.WordCounter
 
             var options = new TextFileProviderOptions(command.SourceFile, command.TargetFile, 4 * 1024, encoding);
             builder.RegisterInstance(options);
-            builder.RegisterType<TextFileProvider>().As<IDataProvider>();
+
+            builder
+                .RegisterType<TextFileReader>()
+                .As<IReader>()
+                .SingleInstance();
+
+            builder
+              .RegisterType<TextFileWriter>()
+              .As<IWriter>()
+              .SingleInstance();
 
             return builder.Build();
         }
 
         private static IContainer CreateContainerInternal(ConsoleCommand command, ContainerBuilder builder)
         {
-            var provider = new StdOutProvider(command.Text);
-            builder.RegisterInstance(provider).As<IDataProvider>();
+            builder
+               .RegisterType<ConsoleReader>()
+               .WithParameter(
+                    (info, context) => info.ParameterType == typeof(string),
+                    (info, context) => command.Text
+                )
+               .As<IReader>()
+               .SingleInstance();
+
+            builder
+              .RegisterType<ConsoleWriter>()
+              .As<IWriter>()
+              .SingleInstance();
+
             return builder.Build();
         }
 
         private static IContainer CreateContainerInternal(DatabaseCommand command, ContainerBuilder builder)
-        {
+        {  
             var options = new DatabaseProviderOptions(command.ConnectionString, command.Table, command.Column);
+            var dbOptions = new DbContextOptionsBuilder<DatabaseContext>()
+                .UseNpgsql(options.ConnectionStrings);
+          
             builder.RegisterInstance(options);
-            builder.RegisterType<DatabaseProvider.DatabaseProvider>().As<IDataProvider>();
+            builder.RegisterInstance(dbOptions.Options);
+
+            builder
+                .RegisterType<DatabaseReader>()
+                .As<IReader>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<DatabaseWriter>()
+                .As<IWriter>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<DatabaseContext>()
+                .AsSelf()
+                .SingleInstance();
+
             return builder.Build();
         }
     }

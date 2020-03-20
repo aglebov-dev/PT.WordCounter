@@ -2,7 +2,7 @@
 
 namespace PT.WordCounter.DatabaseProvider.DataAccess
 {
-    internal class DatabaseContext: DbContext
+    public class DatabaseContext: DbContext
     {
         public DbSet<Text> Texts { get; set; }
 

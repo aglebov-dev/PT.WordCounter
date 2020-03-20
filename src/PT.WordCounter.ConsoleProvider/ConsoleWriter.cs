@@ -5,7 +5,7 @@ using PT.WordCounter.Contracts;
 
 namespace PT.WordCounter.ConsoleProvider
 {
-    internal class ConsoleWriter : IWriter
+    public class ConsoleWriter : IWriter
     {
         private readonly CancellationToken _token;
 

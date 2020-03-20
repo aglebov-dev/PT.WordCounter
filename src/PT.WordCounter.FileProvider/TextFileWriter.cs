@@ -5,7 +5,7 @@ using PT.WordCounter.Contracts;
 
 namespace PT.WordCounter.FileProvider
 {
-    internal class TextFileWriter : IWriter
+    public class TextFileWriter : IWriter
     {
         private const byte COMMA = 0x2C;
         private const byte NEW_LINE = 0x0A;

@@ -7,7 +7,7 @@ using PT.WordCounter.DatabaseProvider.DataAccess;
 
 namespace PT.WordCounter.DatabaseProvider
 {
-    internal class DatabaseWriter : IWriter
+    public class DatabaseWriter : IWriter
     {
         private readonly DatabaseProviderOptions _options;
         private readonly CancellationToken _token;

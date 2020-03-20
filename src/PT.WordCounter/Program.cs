@@ -31,7 +31,7 @@ namespace PT.WordCounter
 
         private static int RunCommand(ICommand command, CancellationToken token)
         {
-            var container = CompositionRoot.CreateContainer(command);
+            var container = CompositionRoot.CreateContainer(command, token);
             var process = container.Resolve<Processor>();
 
             try
