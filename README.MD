@@ -1,4 +1,7 @@
-# How to
+# App
+`Attention: his application is a test task, so you should not use it in product development`
+
+## How to
 
 The application supports 3 main data providers:
 - file provider
