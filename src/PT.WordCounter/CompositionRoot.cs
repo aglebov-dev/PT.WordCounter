@@ -59,12 +59,12 @@ namespace PT.WordCounter
             builder
                 .RegisterType<TextFileReader>()
                 .As<IReader>()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             builder
-              .RegisterType<TextFileWriter>()
-              .As<IWriter>()
-              .SingleInstance();
+                .RegisterType<TextFileWriter>()
+                .As<IWriter>()
+                .InstancePerLifetimeScope();
 
             return builder.Build();
         }
@@ -78,12 +78,12 @@ namespace PT.WordCounter
                     (info, context) => command.Text
                 )
                .As<IReader>()
-               .SingleInstance();
+               .InstancePerLifetimeScope();
 
             builder
               .RegisterType<ConsoleWriter>()
               .As<IWriter>()
-              .SingleInstance();
+              .InstancePerLifetimeScope();
 
             return builder.Build();
         }
@@ -100,17 +100,17 @@ namespace PT.WordCounter
             builder
                 .RegisterType<DatabaseReader>()
                 .As<IReader>()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<DatabaseWriter>()
                 .As<IWriter>()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<DatabaseContext>()
                 .AsSelf()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             return builder.Build();
         }
