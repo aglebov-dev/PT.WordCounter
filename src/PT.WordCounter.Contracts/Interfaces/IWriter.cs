@@ -1,7 +1,9 @@
-﻿namespace PT.WordCounter.Contracts
+﻿using System.Threading;
+
+namespace PT.WordCounter.Contracts
 {
     public interface IWriter
     {
-        void Write(TreeNode tree);
+        void Write(TreeNode tree, CancellationToken token);
     }
 }

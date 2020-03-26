@@ -36,7 +36,7 @@ namespace PT.WordCounter
 
             try
             {
-                process.StartAsync(token).Wait();
+                process.StartAsync(token);
                 return 0;
             }
             catch (Exception ex)

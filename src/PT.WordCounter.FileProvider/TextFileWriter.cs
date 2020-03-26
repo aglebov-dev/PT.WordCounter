@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using PT.WordCounter.Contracts;
 
 namespace PT.WordCounter.FileProvider
@@ -16,21 +17,25 @@ namespace PT.WordCounter.FileProvider
             _options = options;
         }
 
-        public void Write(TreeNode tree)
+        public void Write(TreeNode tree, CancellationToken token)
         {
             using (var stream = new FileStream(_options.ReportFilePath, FileMode.Create, FileAccess.Write, FileShare.None, _options.BufferSize, true))
             {
-                Flush(stream, tree);
+                Flush(stream, tree, token);
             }
         }
 
-        public void Flush(Stream stream, TreeNode tree)
+        public void Flush(Stream stream, TreeNode tree, CancellationToken token)
         {
             stream = stream ?? throw new ArgumentNullException(nameof(stream));
 
             var words = tree.GetWords().OrderByDescending(x => x).ToArray();
             for (int i = 0; i < words.Length - 1; i++)
             {
+                if (token.IsCancellationRequested)
+                {
+                    break;
+                }
                 WriteToStream(stream, words[i]);
                 stream.WriteByte(NEW_LINE);
             }
@@ -43,7 +48,7 @@ namespace PT.WordCounter.FileProvider
 
         private void WriteToStream(Stream stream, TreeNode word)
         {
-            var bytes = word.AsBytes();
+            var bytes = Constants.EncodingWin1251.GetBytes(word.AsString());
             var count = Constants.EncodingWin1251.GetBytes(word.Count.ToString());
 
             stream.Write(bytes, 0, word.Length);

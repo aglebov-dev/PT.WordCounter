@@ -7,19 +7,12 @@ namespace PT.WordCounter.ConsoleProvider
 {
     public class ConsoleWriter : IWriter
     {
-        private readonly CancellationToken _token;
-
-        public ConsoleWriter(CancellationToken token)
-        {
-            _token = token;
-        }
-
-        public void Write(TreeNode tree)
+        public void Write(TreeNode tree, CancellationToken token)
         {
             var words = tree.GetWords().OrderByDescending(x => x).ToArray();
             for (int i = 0; i < words.Length; i++)
             {
-                if (_token.IsCancellationRequested)
+                if (token.IsCancellationRequested)
                 {
                     break;
                 }

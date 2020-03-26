@@ -14,7 +14,7 @@ namespace PT.WordCounter.Logic
             _root = TreeNode.CreateRoot();
         }
 
-        public void Add(byte[] data)
+        public void Add(string data)
         {
             if (data?.Length > 0)
             {
@@ -22,7 +22,7 @@ namespace PT.WordCounter.Logic
             }
         }
 
-        internal void AddRange(IEnumerable<byte[]> words)
+        internal void AddRange(IEnumerable<string> words)
         {
             words = words ?? throw new ArgumentNullException(nameof(words));
             words.AsParallel().ForAll(Add);

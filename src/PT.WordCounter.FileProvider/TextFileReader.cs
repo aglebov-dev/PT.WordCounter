@@ -8,15 +8,13 @@ namespace PT.WordCounter.FileProvider
     public class TextFileReader : IReader
     {
         private readonly TextFileProviderOptions _options;
-        private readonly CancellationToken _token;
 
-        public TextFileReader(TextFileProviderOptions options, CancellationToken cancellationToken)
+        public TextFileReader(TextFileProviderOptions options)
         {
             _options = options;
-            _token = cancellationToken;
         }
 
-        public IEnumerable<ReadPackage> Read()
+        public IEnumerable<ReadPackage> Read(CancellationToken token)
         {
             var stream = default(FileStream);
             try
@@ -33,10 +31,9 @@ namespace PT.WordCounter.FileProvider
 
                 using (var reader = new StreamReader(stream, _options.Encoding))
                 {
-                    while (stream.Position != stream.Length && _token.IsCancellationRequested == false)
+                    while (stream.Position != stream.Length && token.IsCancellationRequested == false)
                     {
-                        var text = reader.ReadLine();
-                        var line = Constants.EncodingWin1251.GetBytes(text);
+                        var line = reader.ReadLine();
                         yield return new ReadPackage(line);
                     }
                 }

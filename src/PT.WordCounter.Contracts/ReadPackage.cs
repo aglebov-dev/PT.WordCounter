@@ -1,16 +1,11 @@
-﻿using System;
-
-namespace PT.WordCounter.Contracts
+﻿namespace PT.WordCounter.Contracts
 {
     public struct ReadPackage
     {
-        /// <summary>
-        /// String at Windows-1251 encoding
-        /// </summary>
-        public byte[] TextLine { get; }
-        public ReadPackage(byte[] textLine)
+        public string TextLine { get; }
+        public ReadPackage(string textLine)
         {
-            TextLine = textLine ?? Array.Empty<byte>();
+            TextLine = textLine ?? string.Empty;
         }
     }
 }
