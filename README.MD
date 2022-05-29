@@ -1,5 +1,6 @@
 # App
 `Attention: his application is a test task, so you should not use it in product development`
+Application for counting words in data provided from various sources
 
 ## How to
 
